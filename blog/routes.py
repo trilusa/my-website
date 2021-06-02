@@ -1,6 +1,6 @@
 from blog import app
 from flask import render_template, flash, redirect, url_for, request
-from blog.forms import LoginForm
+from blog.forms import LoginForm, EditPostForm
 from flask_login import current_user, login_user, logout_user, login_required
 from blog.models import User
 from werkzeug.urls import url_parse
@@ -56,3 +56,8 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route('/edit_post')
+def edit_post():
+    form = EditPostForm()
+    return render_template('edit_post.html', title='Edit Post', form=form)
