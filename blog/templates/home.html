@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block blog_content %}
 	<h1>Welcome to my Blog!</h1>
 	{% for post in posts %}
 	    <div>
@@ -8,4 +8,4 @@
 	     	<p>{{ post.content }}</p>
 	    </div>
 	{% endfor %}	
-{% endblock content %}
+{% endblock %}
