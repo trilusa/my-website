@@ -1,26 +1,10 @@
 from blog import app, db
 from flask import render_template, flash, redirect, url_for, request
-from blog.forms import LoginForm, EditProfileForm
+from blog.forms import LoginForm, EditPostForm
 from flask_login import current_user, login_user, logout_user, login_required
 from blog.models import User, Post
 from werkzeug.urls import url_parse
 from datetime import datetime
-
-
-# posts = [
-#         {
-#             'meta': {'title': 'Analogy Time'},
-#             'content': 'Analogies are cool!'
-#         },
-#         {
-#             'meta': {'title': 'Category Time'},
-#             'content': 'Categories are cool!'
-#         },
-#         {
-#             'meta': {'title': 'Concept Time'},
-#             'content': 'Concepts are cool!'
-#         }
-#         ]
 
 
 
@@ -33,7 +17,6 @@ def home():
 
 
 @app.route("/about")
-@login_required
 def about():
     return render_template('about.html', title='About')
 
@@ -79,19 +62,29 @@ def before_request():
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
 
-@app.route('/edit_profile', methods=['GET', 'POST'])
+@app.route('/edit_post/<post_title>', methods=['GET', 'POST'])
 @login_required
-def edit_profile():
-    form = EditProfileForm(current_user.username)
+def edit_post(post_title):
+    form = EditPostForm()
+    post = Post.query.filter_by(post_title=post_title).first()
+    form.post_title.data = post.post_title
+    form.body.data = post.body
+    
+        
+
     if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.about_me = form.about_me.data
+        post.post_title = form.post_title.data
+        post.body = form.body.data
         db.session.commit()
         flash('Your changes have been saved.')
-        return redirect(url_for('edit_profile'))
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title='Edit Profile',
-                           form=form)
+        return redirect(url_for('home'))
+
+    return render_template('edit_post.html', title='Edit Post', form=form)
+
+
+@app.route('/blog/<post_title>')
+def post(post_title):
+    post = Post.query.filter_by(post_title=post_title).first_or_404()
+   
+    return render_template('post.html', post=post)
 
