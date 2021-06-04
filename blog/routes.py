@@ -2,29 +2,15 @@ from blog import app
 from flask import render_template, flash, redirect, url_for, request
 from blog.forms import LoginForm
 from flask_login import current_user, login_user, logout_user, login_required
-from blog.models import User
+from blog.models import User, Post
 from werkzeug.urls import url_parse
-
-posts = [
-        {
-            'meta': {'title': 'Analogy Time'},
-            'content': 'Analogies are cool!'
-        },
-        {
-            'meta': {'title': 'Category Time'},
-            'content': 'Categories are cool!'
-        },
-        {
-            'meta': {'title': 'Concept Time'},
-            'content': 'Concepts are cool!'
-        }
-        ]
 
 @app.route("/")
 @app.route("/index")
 @app.route("/home")
 def home():
-    return render_template('home.html', title='Home', posts=posts)
+    posts = Post.query.all()
+    return render_template('home.html', title='Home', posts=reversed(posts))
 
 
 @app.route("/about")
