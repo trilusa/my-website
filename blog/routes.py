@@ -14,7 +14,6 @@ def home():
 
 
 @app.route("/about")
-@login_required
 def about():
     return render_template('about.html', title='About')
 
@@ -42,3 +41,8 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route("/blog/<post_url>")
+def post(post_url):
+    post = Post.query.filter_by(post_url=post_url).first_or_404()
+    return render_template('post.html', title='Blog Post', post=post)
