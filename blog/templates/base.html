@@ -6,7 +6,9 @@
 </head>
 <body>
 	<!-- top menu bar -->
-	<div>Adrian's Blog | <a href="/index">Home</a> | <a href="/about">About</a> | <a href="/login">Login</a>
+	<div>
+        <a href="/home">Home</a>
+        <a href="/about">About</a>
         {% if current_user.is_anonymous %}
         <a href="{{ url_for('login') }}">Login</a>
         {% else %}
