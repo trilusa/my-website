@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Publish Article</h1>
+    <form action="" method="post" novalidate>
+        {{ editor.hidden_tag() }}
+        <p>
+            {{ editor.post_title.label }}<br>
+            {{ editor.post_title(size=32) }}<br>
+            {% for error in editor.post_title.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ editor.post_url.label }}<br>
+            {{ editor.post_url(size=32) }}<br>
+            {% for error in editor.post_url.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ editor.body.label }}<br>
+            {{ editor.body(cols="35", rows="20") }}<br>
+            {% for error in editor.body.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ editor.submit() }}</p>
+    </form>
+{% endblock %}

@@ -1,6 +1,6 @@
-from blog import app
+from blog import app, db
 from flask import render_template, flash, redirect, url_for, request
-from blog.forms import LoginForm
+from blog.forms import LoginForm, PostEditor
 from flask_login import current_user, login_user, logout_user, login_required
 from blog.models import User, Post
 from werkzeug.urls import url_parse
@@ -46,3 +46,26 @@ def logout():
 def post(post_url):
     post = Post.query.filter_by(post_url=post_url).first_or_404()
     return render_template('post.html', title='Blog Post', post=post)
+
+@app.route('/edit/<post_url>',  methods=['GET', 'POST'])
+@login_required
+def edit(post_url):
+    editor = PostEditor()
+    # post = Post() 
+    # if post_url is not 'new':
+    p = Post.query.filter_by(post_url=post_url).first_or_404()
+    
+        
+    if editor.validate_on_submit():
+        p.post_title = editor.post_title.data
+        p.body = editor.body.data
+        p.post_url = editor.post_url.data
+        db.session.commit()
+        return redirect(url_for('home'))
+    elif request.method == 'GET':
+        editor.post_title.data = p.post_title
+        editor.body.data = p.body
+        editor.post_url.data = p.post_url
+    return render_template('edit.html', title="Post Editor", post=p, editor=editor)
+
+
