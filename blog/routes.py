@@ -51,17 +51,23 @@ def post(post_url):
 @login_required
 def edit(post_url):
     editor = PostEditor()
-    # post = Post() 
+
     if post_url != 'new':
         p = Post.query.filter_by(post_url=post_url).first_or_404()
     else:
         p = Post()
         
     if editor.validate_on_submit():
-        p.post_title = editor.post_title.data
-        p.body = editor.body.data
-        p.post_url = editor.post_url.data
-        db.session.add(p)
+        if editor.delete.data:
+            if post_url == 'new':
+                return redirect(url_for('home'))
+            else:
+                db.session.delete(p)
+        else:
+            p.post_title = editor.post_title.data
+            p.body = editor.body.data
+            p.post_url = editor.post_url.data
+            db.session.add(p)
         db.session.commit()
         return redirect(url_for('home'))
     elif request.method == 'GET':
@@ -69,3 +75,9 @@ def edit(post_url):
         editor.body.data = p.body
         editor.post_url.data = p.post_url
     return render_template('edit.html', title="Post Editor", post=p, editor=editor)
+
+@app.route('/new')
+@app.route('/editor')
+@app.route('/edit')
+def new_post():
+    return redirect(url_for('edit', post_url='new'))

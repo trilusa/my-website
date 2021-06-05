@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "mybase.html" %}
 
 {% block content %}
     <h1>Publish Article</h1>
@@ -18,13 +18,17 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
+        {{  editor.body() }}
+        <!-- <p>
             {{ editor.body.label }}<br>
-            {{ editor.body(cols="35", rows="20") }}<br>
+            {{ editor.body(cols="80", rows="20") }}<br>
             {% for error in editor.body.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
-        <p>{{ editor.submit() }}</p>
+        </p> -->
+        <br><p>{{ editor.submit() }} {{ editor.delete() }}</p>
     </form>
+
+    {{ ckeditor.load() }}
+    {{ ckeditor.config(name='body') }}
 {% endblock %}
