@@ -1,0 +1,30 @@
+<!-- <div>
+	<h2><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></h2>
+ 	
+</div>
+ -->
+<!-- <div class='container'>
+<div class="card>
+  	<div class="card-body">
+  		<h2><a href="blog/{{ post.post_url }}" clas="card-title card-link">{{ post.post_title }}</a></h2>
+		<p class="card-text">{{ post.description|safe }}</p>
+	</div>
+</div>
+</div> -->
+<!-- 
+<div class="card" style="width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">Card title</h4>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div> -->
+
+<div class = "col">
+  <div class="card text-dark bg-light mb-3 h-100" >
+    <div class="card-body">
+      <h5> <a href="blog/{{ post.post_url }}" class="card-title text-decoration-none">{{ post.post_title }}</a></h5>
+      <p class="card-text text-muted">{{ post.description|safe }}</p>
+    </div>
+  </div>
+</div>

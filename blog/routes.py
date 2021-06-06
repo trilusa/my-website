@@ -65,6 +65,7 @@ def edit(post_url):
                 db.session.delete(p)
         else:
             p.post_title = editor.post_title.data
+            p.description = editor.description.data
             p.body = editor.body.data
             p.post_url = editor.post_url.data
             db.session.add(p)
@@ -72,6 +73,7 @@ def edit(post_url):
         return redirect(url_for('home'))
     elif request.method == 'GET':
         editor.post_title.data = p.post_title
+        editor.description.data = p.description
         editor.body.data = p.body
         editor.post_url.data = p.post_url
     return render_template('edit.html', title="Post Editor", post=p, editor=editor)

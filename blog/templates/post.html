@@ -1,7 +1,7 @@
 {% extends "mybase.html" %}
 
 {% block _content %}
-	<div>
+	<div class="container">
 		{% if current_user.is_authenticated %}
         <a href="{{ url_for('edit', post_url=post.post_url) }}">Edit</a>
         {% endif %}

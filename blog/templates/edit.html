@@ -1,7 +1,8 @@
 {% extends "mybase.html" %}
 
 {% block _content %}
-    <h1>Publish Article</h1>
+<div class="container">
+    <h2>Publish Article</h2>
     <form action="" method="post" novalidate>
         {{ editor.hidden_tag() }}
         <p>
@@ -18,17 +19,17 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        {{  editor.body() }}
-        <!-- <p>
-            {{ editor.body.label }}<br>
-            {{ editor.body(cols="80", rows="20") }}<br>
-            {% for error in editor.body.errors %}
+        <p>
+            {{ editor.description.label }}<br>
+            {{ editor.description(cols="80", rows="3") }}<br>
+            {% for error in editor.description.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p> -->
+        </p>
+        {{  editor.body() }}
         <br><p>{{ editor.submit() }} {{ editor.delete() }}</p>
     </form>
-
+</div>
     {{ ckeditor.load() }}
     {{ ckeditor.config(name='body') }}
 {% endblock %}

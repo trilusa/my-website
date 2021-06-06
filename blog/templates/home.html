@@ -1,11 +1,39 @@
 {% extends "mybase.html" %}
 
+
+
 {% block _content %}
+<div class="container width: 80">
+
 	<h1>Welcome to my Blog!</h1>
-	{% for post in posts %}
-	    <div>
-	    	<h2><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></h2>
-	     	<p>{{ post.body|safe }}</p>
-	    </div>
-	{% endfor %}	
+
+
+	<div class="row">
+		<div class="col-sm-9">
+			<div class="row row-cols-2 row-cols-md-2 g-4">
+			{% for post in posts %}
+			     {% include '_post.html' %}
+			{% endfor %}	
+			</div>
+		</div>
+
+
+		<div class="col-sm-3">
+			<div class="panel panel-default">
+			    <div class="panel-heading">
+			        <h4>Featured Posts</h4>
+			    </div>
+			    <ul class="list-group">
+					{% for post in posts %}
+					      <li class="list-group-item"><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></li>
+					{% endfor %}        
+			    </ul>
+			</div>
+		</div>
+
+
+
+	</div>
+</div>
+
 {% endblock %}

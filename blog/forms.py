@@ -11,7 +11,8 @@ class LoginForm(FlaskForm):
 
 class PostEditor(FlaskForm):
     post_title = StringField('Title', validators=[DataRequired()])
-    body = CKEditorField('Body')#, validators=[DataRequired()])
+    body = CKEditorField('Body')
+    description = TextAreaField('Description')
     post_url = StringField('Perma-link', validators=[DataRequired()])
     submit = SubmitField('Publish')
     delete = SubmitField('Delete')

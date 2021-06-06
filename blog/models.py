@@ -23,6 +23,7 @@ class User(UserMixin, db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     post_title = db.Column(db.String(500))
+    description = db.Column(db.String(2000))
     body = db.Column(db.String(20000))
     post_url = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
