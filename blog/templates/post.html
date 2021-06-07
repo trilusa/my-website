@@ -6,6 +6,7 @@
         <a href="{{ url_for('edit', post_url=post.post_url) }}">Edit</a>
         {% endif %}
     	<h2>{{ post.post_title }}</h2>
+    	<h6>{{ post.timestamp.strftime('%B %-d, %Y') }}</h6>
      	{{ post.body|safe }}
 	</div>
 {% endblock %}
