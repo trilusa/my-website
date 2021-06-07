@@ -1,0 +1,48 @@
+{% extends "mybase.html" %}
+
+{% block _content %}
+<div class="container">
+    <h2>Publish Article</h2>
+    <form action="" method="post" novalidate>
+        {{ editor.hidden_tag() }}
+
+        <p>
+            {{ editor.post_title.label }}<br>
+            {{ editor.post_title(size=32) }}<br>
+            {% for error in editor.post_title.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>
+            {{ editor.post_url.label }}<br>
+            {{ editor.post_url(size=32) }}<br>
+            {% for error in editor.post_url.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        
+        <p>
+            {{ editor.category.label }}<br>
+            {{ editor.category(size=32) }}<br>
+            {% for error in editor.category.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>
+            {{ editor.description.label }}<br>
+            {{ editor.description(cols="80", rows="3") }}<br>
+            {% for error in editor.description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        {{  editor.body() }}
+
+        <br><p>{{ editor.featured() }} {{ editor.featured.label }}  {{ editor.submit() }}     {{ editor.delete() }}</p>
+    </form>
+</div>
+    {{ ckeditor.load() }}
+    {{ ckeditor.config(name='body') }}
+{% endblock %}

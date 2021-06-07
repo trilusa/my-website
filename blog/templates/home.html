@@ -1,11 +1,30 @@
-{% extends "base.html" %}
+{% extends "mybase.html" %}
 
-{% block blog_content %}
+
+
+{% block _content %}
+<div class="container width: 80">
+
 	<h1>Welcome to my Blog!</h1>
-	{% for post in posts %}
-	    <div>
-	    	<h2>{{ post.meta.title }}</h2>
-	     	<p>{{ post.content }}</p>
-	    </div>
-	{% endfor %}	
+
+
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="row row-cols-1 row-cols-md-1 g-4 ">
+			{% for post in posts %}
+			     {% include '_post.html' %}
+			{% endfor %}	
+			</div>
+		</div>
+
+
+		<div class="col-sm-4">
+			{% include '_featured.html' %}
+		</div>
+
+
+
+	</div>
+</div>
+
 {% endblock %}

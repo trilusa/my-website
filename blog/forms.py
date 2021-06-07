@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired, Length, ValidationError
+from wtforms.validators import DataRequired, Length, ValidationError, AnyOf
 from blog.models import User
+from flask_ckeditor import CKEditorField
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -9,22 +10,12 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
-class EditPostForm(FlaskForm):
+class PostEditor(FlaskForm):
     post_title = StringField('Title', validators=[DataRequired()])
-    post_content = TextAreaField('Post Content', validators=[DataRequired()])
+    body = CKEditorField('Body')
+    description = TextAreaField('Description')
+    post_url = StringField('Perma-link', validators=[DataRequired()])
     submit = SubmitField('Publish')
-
-class EditProfileForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
-    submit = SubmitField('Submit')
-
-    def __init__(self, original_username, *args, **kwargs):
-        super(EditProfileForm, self).__init__(*args, **kwargs)
-        self.original_username = original_username
-
-    def validate_username(self, username):
-        if username.data != self.original_username:
-            user = User.query.filter_by(username=self.username.data).first()
-            if user is not None:
-                raise ValidationError('Please use a different username.')
+    delete = SubmitField('Delete')
+    featured = BooleanField('Featured?')
+    category = StringField("Category", validators=[AnyOf(values=['mathsci', 'eng', 'artlit', 'other', 'phil'])])
