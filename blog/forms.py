@@ -16,3 +16,4 @@ class PostEditor(FlaskForm):
     post_url = StringField('Perma-link', validators=[DataRequired()])
     submit = SubmitField('Publish')
     delete = SubmitField('Delete')
+    featured = BooleanField('Featured?')

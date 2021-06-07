@@ -25,6 +25,9 @@
             {% for error in editor.description.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
+        
+
+            {{ editor.featured() }} {{ editor.featured.label }}
         </p>
         {{  editor.body() }}
         <br><p>{{ editor.submit() }} {{ editor.delete() }}</p>

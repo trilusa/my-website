@@ -10,7 +10,7 @@ from werkzeug.urls import url_parse
 @app.route("/home")
 def home():
     posts = Post.query.all()
-    return render_template('home.html', title='Home', posts=reversed(posts))
+    return render_template('home.html', title='Home', posts=list(reversed(posts)))
 
 
 @app.route("/about")
@@ -68,6 +68,7 @@ def edit(post_url):
             p.description = editor.description.data
             p.body = editor.body.data
             p.post_url = editor.post_url.data
+            p.featured = editor.featured.data
             db.session.add(p)
         db.session.commit()
         return redirect(url_for('home'))
@@ -76,6 +77,7 @@ def edit(post_url):
         editor.description.data = p.description
         editor.body.data = p.body
         editor.post_url.data = p.post_url
+        editor.featured.data = p.featured
     return render_template('edit.html', title="Post Editor", post=p, editor=editor)
 
 @app.route('/new')

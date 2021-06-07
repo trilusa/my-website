@@ -28,6 +28,8 @@ class Post(db.Model):
     post_url = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    featured = db.Column(db.Boolean)
+
 
     def __repr__(self):
         return '<Post {}>'.format(self.post_title)
