@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField
+from wtforms.validators import DataRequired, AnyOf
 from flask_ckeditor import CKEditorField
 
 class LoginForm(FlaskForm):
@@ -17,3 +17,4 @@ class PostEditor(FlaskForm):
     submit = SubmitField('Publish')
     delete = SubmitField('Delete')
     featured = BooleanField('Featured?')
+    category = StringField("Category", validators=[AnyOf(values=['mathsci', 'eng', 'artlit', 'other', 'phil'])])

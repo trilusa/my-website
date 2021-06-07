@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Featured Posts</h4>
+    </div>
+    <ul class="list-group">
+		{% for post in posts %}
+			{% if post.featured %}
+		      <li class="list-group-item"><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></li>
+			{% endif %}
+		{% endfor %}        
+    </ul>
+</div>

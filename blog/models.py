@@ -26,9 +26,11 @@ class Post(db.Model):
     description = db.Column(db.String(2000))
     body = db.Column(db.String(20000))
     post_url = db.Column(db.String(140))
+    category = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     featured = db.Column(db.Boolean)
+    # categories = {'mathsci':'Math + Science', 'eng':'Tech + Code', 'artlit':'Art and Literature', 'other':'Other'}
 
 
     def __repr__(self):

@@ -9,8 +9,8 @@
 
 
 	<div class="row">
-		<div class="col-sm-9">
-			<div class="row row-cols-2 row-cols-md-2 g-4">
+		<div class="col-sm-8">
+			<div class="row row-cols-1 row-cols-md-1 g-4 ">
 			{% for post in posts %}
 			     {% include '_post.html' %}
 			{% endfor %}	
@@ -18,19 +18,8 @@
 		</div>
 
 
-		<div class="col-sm-3">
-			<div class="panel panel-default">
-			    <div class="panel-heading">
-			        <h4>Featured Posts</h4>
-			    </div>
-			    <ul class="list-group">
-					{% for post in posts %}
-						{% if post.featured %}
-					      <li class="list-group-item"><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></li>
-						{% endif %}
-					{% endfor %}        
-			    </ul>
-			</div>
+		<div class="col-sm-4">
+			{% include '_featured.html' %}
 		</div>
 
 

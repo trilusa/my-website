@@ -56,7 +56,8 @@ def edit(post_url):
         p = Post.query.filter_by(post_url=post_url).first_or_404()
     else:
         p = Post()
-        
+    
+    # editor.category.choices = [(k, v) for k, v in Post.categories.items()] 
     if editor.validate_on_submit():
         if editor.delete.data:
             if post_url == 'new':
@@ -69,6 +70,7 @@ def edit(post_url):
             p.body = editor.body.data
             p.post_url = editor.post_url.data
             p.featured = editor.featured.data
+            p.category = editor.category.data
             db.session.add(p)
         db.session.commit()
         return redirect(url_for('home'))
@@ -78,6 +80,7 @@ def edit(post_url):
         editor.body.data = p.body
         editor.post_url.data = p.post_url
         editor.featured.data = p.featured
+        editor.category.data = p.category
     return render_template('edit.html', title="Post Editor", post=p, editor=editor)
 
 @app.route('/new')

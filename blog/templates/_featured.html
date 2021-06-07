@@ -1,0 +1,44 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Featured</h4>
+    </div>
+    <br>
+    <h6>Math + Science</h6>
+    <ul class="list-group">
+		{% for post in posts %}
+			{% if post.category == 'mathsci' %}
+		      <li class="list-group-item"><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></li>
+			{% endif %}
+		{% endfor %}        
+    </ul>
+
+    <br>
+    <h6>Tech + Code</h6>
+    <ul class="list-group">
+		{% for post in posts %}
+			{% if post.category == 'eng' %}
+		      <li class="list-group-item"><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></li>
+			{% endif %}
+		{% endfor %}        
+    </ul>
+
+    <br>
+    <h6>Art + Lit</h6>
+    <ul class="list-group">
+		{% for post in posts %}
+			{% if post.category == 'artlit' %}
+		      <li class="list-group-item"><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></li>
+			{% endif %}
+		{% endfor %}        
+    </ul>
+    <br>
+    <h6>Philosophy</h6>
+    <ul class="list-group">
+		{% for post in posts %}
+			{% if post.category == 'phil' %}
+		      <li class="list-group-item"><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></li>
+			{% endif %}
+		{% endfor %}        
+    </ul>
+</div>
