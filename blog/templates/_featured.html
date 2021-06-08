@@ -7,7 +7,7 @@
     <h6>Math + Science</h6>
     <ul class="list-group">
 		{% for post in posts %}
-			{% if post.category == 'mathsci' %}
+			{% if post.category == 'mathsci' and post.featured %}
 		      <li class="list-group-item"><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></li>
 			{% endif %}
 		{% endfor %}        
@@ -17,7 +17,7 @@
     <h6>Tech + Code</h6>
     <ul class="list-group">
 		{% for post in posts %}
-			{% if post.category == 'eng' %}
+			{% if post.category == 'eng' and post.featured %}
 		      <li class="list-group-item"><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></li>
 			{% endif %}
 		{% endfor %}        
@@ -27,7 +27,7 @@
     <h6>Art + Lit</h6>
     <ul class="list-group">
 		{% for post in posts %}
-			{% if post.category == 'artlit' %}
+			{% if post.category == 'artlit' and post.featured %}
 		      <li class="list-group-item"><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></li>
 			{% endif %}
 		{% endfor %}        
@@ -36,7 +36,7 @@
     <h6>Philosophy</h6>
     <ul class="list-group">
 		{% for post in posts %}
-			{% if post.category == 'phil' %}
+			{% if post.category == 'phil' and post.featured%}
 		      <li class="list-group-item"><a href="blog/{{ post.post_url }}">{{ post.post_title }}</a></li>
 			{% endif %}
 		{% endfor %}        
