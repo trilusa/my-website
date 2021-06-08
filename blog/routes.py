@@ -17,7 +17,8 @@ def home():
 
 @app.route("/about")
 def about():
-    return render_template('about.html', title='About')
+    post = Post.query.filter_by(post_url='about').first_or_404()
+    return render_template('about.html', title='About', post=post)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
